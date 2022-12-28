@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Tovar page{% endblock %}
+{% block content %}
+
+<div class="container" style="height: auto; width: auto; margin-right: auto"; class="col-1" >
+    <img src="/static/{{tovar.photo}}" alt="Card image cap" style="height: 400px; width: 400px; border-radius: 15px;">
+</div>
+<div class="col-5" style="height: 100%;
+line-height: 100%;
+text-align: center;
+background-color:dimgray; color:beige;
+border-radius: 15px;
+">
+    <div class="container"; classs="col-2">
+    <div class="container lg">
+    <h1>{{tovar.name}}</h1>
+    <p>{{tovar.type}}</p>
+    <p>Description: {{tovar.description}}</p>
+    <p>Brand/vendor: {{tovar.brand}}</p>
+    <p>Price: {{tovar.price}}₽</p>
+    </div>
+    </div>
+</div>
+</body>
+{% if c_a == True or c_a == False %} 
+    <div class="container" style="height: 100%;
+    line-height: 100%;
+    text-align: center;
+    background-color:dimgray; color:beige;
+    border-radius: 15px;">
+        <h2 style="margin-left: auto; margin-right: auto;">Adding a comment</h2>
+        {% for field, errors in form.errors.items() %}
+        {{ ', '.join(errors) }}
+        {% endfor %}
+        <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
+            <div class="form-group" style="height: 100%;
+            line-height: 100%;
+            text-align: center;
+            background-color:dimgray; color:beige;
+            border-radius: 15px;">
+                {{ form.csrf_token() }}
+                {{ form.like.label }}
+                {{ form.like(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.csrf_token() }}
+                {{ form.comment.label }}
+                {{ form.comment(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.csrf_token() }}          
+                {{ form.submit(class="btn btn-primary")}}
+                </div>
+        </form>
+    </div>
+    {% endif %}
+    <div style="width: 10rem;" style="height: 100%;
+    line-height: 100%;
+    text-align: center;
+    background-color:gray; color:beige;
+    border-radius: 15px;">
+        {% for i in comments %}
+        <div class="card" >
+            <div class="container">
+                <p>Rating: {{i.like}}/5</p>
+                <p>Comment: {{i.comment}}</p>
+            </div>
+        </div>
+    {% endfor %}
+    </div>  
+</div>
+{% endblock %}
