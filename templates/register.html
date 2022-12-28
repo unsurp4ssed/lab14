@@ -40,7 +40,7 @@ border-radius: 15px;
             {{ form.csrf_token() }}
             {{ form.password22.label }}
             {{ form.password22(class="form-control") }}
-            {% for error in form.password22.errors %}
+            {% for error in form.confirm.errors %}
                 {{error}}
             {% endfor %}
         </div>
