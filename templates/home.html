@@ -6,10 +6,10 @@
     <a class="me-3 py-2 btn btn-primary" href="/register">Register</a> 
   {% endif %} 
   {% if c_a == True %} 
-    <a style="margin-left: 16px;" class="me-3 py-2 btn btn-primary"   href="/add">Add product</a> 
+    <a style="margin-left: 16px;" class="me-3 py-2 btn btn-primary" href="/add">Add product</a> 
   {% endif %} 
   {% if  c_a == True or c_a == False%} 
-    <a class="py-2 text-dark btn btn-primary"  href="/logout"><p>Log out</p></a> 
+    <a class="py-2 text-dark btn btn-danger"  href="/logout"><p>Log out</p></a> 
   {% endif %} 
 {% endblock %} 
 {% block content %} 
@@ -31,15 +31,16 @@
     <button type="submit" class="btn btn-success" >Filter</button>
   </div>
 </form>
-{% for i in product %} 
+{% for i in product %}
       <div class="card col-5" style="width: 18rem; margin: auto; background-color:dimgray; color:beige;"> 
-        <img class="card-img-top" src="/static/{{i.photo}}" alt="Card image cap" style="height: 250px;"> 
+        <img class="card-img-top" src="/static/{{i.photo}}" alt="image" style="height: 250px;"> 
         <div class="card-body"> 
           <h5  style="margin:auto; height: 15px;">{{i.name}}</h5> 
         </div>
         <ul class="list-group list-group-flush"> 
           <li  style="margin:auto; height: 20px">Brand: {{i.brand}}</li> 
           <li  style="margin:auto; height: 20px">Price: {{i.price}}₽</li> 
+          <li  style="margin:auto; height: 20px">Rating: {{avr[i.id]}}</li>
         </ul>
         <div class="card-body" style="margin:auto"> 
           <a href="/{{i.id}}" class="btn btn-primary" class="card-link">More...</a> 
@@ -51,6 +52,6 @@
           </div>
         {% endif %} 
        </div> 
-{%endfor%} 
+{% endfor %}
 {% endblock %}
       </body>

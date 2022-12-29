@@ -75,7 +75,19 @@ def home():
             a = product.query.filter_by(brand='intel').all()
     else:
         a = product.query.order_by(product.id).all()
-    return render_template("home.html", product=a, c_a=c_a)
+    
+    for i in product.query.filter_by(id=1):
+        s = 0; k = 0
+        for j in Comments.query.filter_by(tovar_id=i.id).all():
+            s+=j.like; k+=1
+    avr = [int(s/k)]
+    for i in product.query.all():
+        s = 0; k = 0
+        for j in Comments.query.filter_by(tovar_id=i.id).all():
+            s+=j.like; k+=1
+        try: avr += [int(s/k)]
+        except ZeroDivisionError: avr += [0]
+    return render_template("home.html", product=a, c_a=c_a, avr = avr)
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
